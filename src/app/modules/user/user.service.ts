@@ -2,12 +2,27 @@ import { User } from '@prisma/client';
 import httpStatus from 'http-status';
 import { Secret } from 'jsonwebtoken';
 import config from '../../../config';
+import { ENUM_USER_ROLE } from '../../../enums/user';
 import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import prisma from '../../../shared/prisma';
 import { ILoginUserResponse, IUser, IUserLogin } from './user.interface';
 
 const createUser = async (data: User): Promise<IUser> => {
+  data.role = 'user';
+  return await prisma.user.create({
+    data,
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+    },
+  });
+};
+
+const createAdmin = async (data: User): Promise<IUser> => {
+  data.role = 'admin';
   return await prisma.user.create({
     data,
     select: {
@@ -67,16 +82,41 @@ const getAllUsers = async (): Promise<IUser[]> => {
   return result;
 };
 
-const getSingleUser = async (id: string): Promise<IUser | null> => {
-  return await prisma.user.findUnique({
-    where: { id },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-    },
-  });
+const getSingleUser = async (
+  id: string,
+  user: any
+): Promise<IUser | null | undefined> => {
+  let isUserExist;
+  if (
+    user.role === ENUM_USER_ROLE.ADMIN ||
+    user.role === ENUM_USER_ROLE.SUPER_ADMIN
+  ) {
+    isUserExist = await prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    });
+  } else {
+    isUserExist = await prisma.user.findUnique({
+      where: { id, role: user.role },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    });
+  }
+
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
+  }
+
+  return isUserExist;
 };
 
 const updateUser = async (
@@ -115,6 +155,7 @@ const userProfile = async (id: string): Promise<User | null> => {
 
 export const UserService = {
   createUser,
+  createAdmin,
   getAllUsers,
   getSingleUser,
   updateUser,

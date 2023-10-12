@@ -20,10 +20,16 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', routes);
 app.post('/api/v1/auth/signup', UserController.createUser);
+app.post(
+  '/api/v1/auth/create-admin',
+  auth(ENUM_USER_ROLE.SUPER_ADMIN),
+  UserController.createAdmin
+);
 app.post('/api/v1/auth/signin', UserController.loginUser);
+
 app.get(
   '/api/v1/profile',
-  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
+  auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
   UserController.userProfile
 );
 
