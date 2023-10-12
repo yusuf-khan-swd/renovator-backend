@@ -110,6 +110,19 @@ const userProfile = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateUserProfile = catchAsync(async (req: Request, res: Response) => {
+  const id = req.user?.userId;
+  const data = req.body;
+  const result = await UserService.updateUserProfile(id, data);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User Profile fetched successfully',
+    data: result,
+  });
+});
+
 export const UserController = {
   createUser,
   createAdmin,
@@ -118,5 +131,6 @@ export const UserController = {
   updateUser,
   deleteUser,
   userProfile,
+  updateUserProfile,
   loginUser,
 };

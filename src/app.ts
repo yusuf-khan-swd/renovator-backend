@@ -33,6 +33,12 @@ app.get(
   UserController.userProfile
 );
 
+app.patch(
+  '/api/v1/profile',
+  auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
+  UserController.updateUserProfile
+);
+
 app.get('/', (req, res) => {
   res.send({ success: true, message: 'Api working' });
 });

@@ -133,6 +133,28 @@ const userProfile = async (id: string): Promise<User | null> => {
   });
 };
 
+const updateUserProfile = async (
+  id: string,
+  data: Partial<User>
+): Promise<IUser | null> => {
+  const result = await prisma.user.update({
+    where: { id },
+    data,
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+    },
+  });
+
+  if (!result) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User update failed');
+  }
+
+  return result;
+};
+
 export const UserService = {
   createUser,
   createAdmin,
@@ -141,5 +163,6 @@ export const UserService = {
   updateUser,
   deleteUser,
   userProfile,
+  updateUserProfile,
   loginUser,
 };
