@@ -6,9 +6,14 @@ import { ENUM_USER_ROLE } from '../../../enums/user';
 import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import prisma from '../../../shared/prisma';
-import { ILoginUserResponse, IUser, IUserLogin } from './user.interface';
+import {
+  ILoginUserResponse,
+  IUser,
+  IUserLogin,
+  IUserResponse,
+} from './user.interface';
 
-const createUser = async (data: User): Promise<IUser> => {
+const createUser = async (data: User): Promise<IUserResponse> => {
   data.role = 'user';
   return await prisma.user.create({
     data,
@@ -21,7 +26,7 @@ const createUser = async (data: User): Promise<IUser> => {
   });
 };
 
-const createAdmin = async (data: User): Promise<IUser> => {
+const createAdmin = async (data: User): Promise<IUserResponse> => {
   data.role = 'admin';
   return await prisma.user.create({
     data,
@@ -70,7 +75,7 @@ const loginUser = async (data: IUserLogin): Promise<ILoginUserResponse> => {
   };
 };
 
-const getAllUsers = async (user: any): Promise<IUser[]> => {
+const getAllUsers = async (user: any): Promise<IUserResponse[]> => {
   let result;
 
   if (user.role === ENUM_USER_ROLE.SUPER_ADMIN) {
@@ -98,7 +103,9 @@ const getAllUsers = async (user: any): Promise<IUser[]> => {
   return result;
 };
 
-const getSingleUser = async (id: string): Promise<IUser | null | undefined> => {
+const getSingleUser = async (
+  id: string
+): Promise<IUserResponse | null | undefined> => {
   const isUserExist = await prisma.user.findUnique({
     where: { id },
     select: {
@@ -118,21 +125,54 @@ const getSingleUser = async (id: string): Promise<IUser | null | undefined> => {
 
 const updateUser = async (
   id: string,
-  data: Partial<User>
-): Promise<IUser | null> => {
-  return await prisma.user.update({
-    where: { id },
-    data,
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-    },
-  });
+  user: any,
+  data: Partial<IUser>
+): Promise<IUserResponse | null | undefined> => {
+  const isUserExist = await prisma.user.findUnique({ where: { id } });
+
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
+  }
+
+  let result;
+
+  if (user.role === ENUM_USER_ROLE.SUPER_ADMIN) {
+    result = await prisma.user.update({
+      where: { id },
+      data,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    });
+  } else {
+    const isUserRoleUser = isUserExist.role === 'user';
+
+    if (!isUserRoleUser) {
+      throw new ApiError(
+        httpStatus.NOT_FOUND,
+        'Admin can only update user information'
+      );
+    }
+
+    result = await prisma.user.update({
+      where: { id },
+      data,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    });
+  }
+
+  return result;
 };
 
-const deleteUser = async (id: string): Promise<IUser | null> => {
+const deleteUser = async (id: string): Promise<IUserResponse | null> => {
   return await prisma.user.delete({
     where: { id },
     select: {
@@ -153,7 +193,7 @@ const userProfile = async (id: string): Promise<User | null> => {
 const updateUserProfile = async (
   id: string,
   data: Partial<User>
-): Promise<IUser | null> => {
+): Promise<IUserResponse | null> => {
   const result = await prisma.user.update({
     where: { id },
     data,
