@@ -2,6 +2,7 @@ import { User } from '@prisma/client';
 import httpStatus from 'http-status';
 import { Secret } from 'jsonwebtoken';
 import config from '../../../config';
+import { ENUM_USER_ROLE } from '../../../enums/user';
 import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import prisma from '../../../shared/prisma';
@@ -69,15 +70,31 @@ const loginUser = async (data: IUserLogin): Promise<ILoginUserResponse> => {
   };
 };
 
-const getAllUsers = async (): Promise<IUser[]> => {
-  const result = await prisma.user.findMany({
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-    },
-  });
+const getAllUsers = async (user: any): Promise<IUser[]> => {
+  let result;
+
+  if (user.role === ENUM_USER_ROLE.SUPER_ADMIN) {
+    result = await prisma.user.findMany({
+      where: { role: { in: [ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER] } },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    });
+  } else {
+    result = await prisma.user.findMany({
+      where: { role: { in: [ENUM_USER_ROLE.USER] } },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    });
+  }
+
   return result;
 };
 
