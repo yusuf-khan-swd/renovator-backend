@@ -29,6 +29,7 @@ app.post(
 app.post(
   '/api/v1/auth/create-admin',
   auth(ENUM_USER_ROLE.SUPER_ADMIN),
+  validateRequest(UserValidation.createUserZodValidation),
   UserController.createAdmin
 );
 app.post('/api/v1/auth/signin', UserController.loginUser);
@@ -38,10 +39,10 @@ app.get(
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
   UserController.userProfile
 );
-
 app.patch(
   '/api/v1/profile',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
+  validateRequest(UserValidation.updateUserProfileZodValidation),
   UserController.updateUserProfile
 );
 
