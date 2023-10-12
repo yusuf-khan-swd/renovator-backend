@@ -1,4 +1,4 @@
-import { Roles } from '@prisma/client';
+import { $Enums, Roles } from '@prisma/client';
 
 export type IUserLogin = {
   email: string;
@@ -10,9 +10,16 @@ export type ILoginUserResponse = {
   refreshToken?: string;
 };
 
-export type IUser = {
+export type IUserResponse = {
   id: string;
   name: string;
   email: string;
   role: Roles;
+};
+
+export type IUser = {
+  id: string;
+  name: string;
+  email: string;
+  role: $Enums.Roles;
 };
