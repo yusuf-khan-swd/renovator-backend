@@ -13,7 +13,7 @@ datasource db {
 model User {
   id       String @id @default(uuid())
   name     String
-  email    String
+  email    String @unique()
   password String
   role     Roles  @default(user)
 
@@ -28,6 +28,7 @@ model User {
 //   @@map("categories")
 // }
 
+// rename service and add description, availability: boolean
 // model Book {
 //   id              String   @id @default(uuid())
 //   title           String
@@ -43,6 +44,7 @@ model User {
 //   @@map("books")
 // }
 
+// review & rating
 // model ReviewAndRating {
 //   id     String @id @default(uuid())
 //   review String
@@ -56,6 +58,8 @@ model User {
 
 //   @@map("review_and_ratings")
 // }
+
+// booking
 
 // model Order {
 //   id String @id @default(uuid())
