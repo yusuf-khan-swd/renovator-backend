@@ -6,7 +6,9 @@ import routes from './app/routes';
 
 import cookieParser from 'cookie-parser';
 import auth from './app/middleware/auth';
+import validateRequest from './app/middleware/validateRequest';
 import { UserController } from './app/modules/user/user.controller';
+import { UserValidation } from './app/modules/user/user.validation';
 import { ENUM_USER_ROLE } from './enums/user';
 
 const app: Application = express();
@@ -19,7 +21,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', routes);
-app.post('/api/v1/auth/signup', UserController.createUser);
+app.post(
+  '/api/v1/auth/signup',
+  validateRequest(UserValidation.createUserZodValidation),
+  UserController.createUser
+);
 app.post(
   '/api/v1/auth/create-admin',
   auth(ENUM_USER_ROLE.SUPER_ADMIN),
