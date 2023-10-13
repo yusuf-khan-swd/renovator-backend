@@ -142,7 +142,7 @@ enum BookingStatus {
 
 enum ServiceStatus {
   available
-  not_available
+  booked
   upcoming
 
   @@map("service_status")
