@@ -1,5 +1,4 @@
 import express from 'express';
-import { CategoryRoutes } from '../modules/category/category.routes';
 import { OrderRoutes } from '../modules/order/order.routes';
 import { ReviewAndRatingRoutes } from '../modules/reviewAndRating/reviewAndRating.routes';
 import { ServiceRoutes } from '../modules/service/service.routes';
@@ -12,10 +11,6 @@ const moduleRoutes = [
   {
     path: '/users',
     route: UserRoutes,
-  },
-  {
-    path: '/categories',
-    route: CategoryRoutes,
   },
   {
     path: '/services',
