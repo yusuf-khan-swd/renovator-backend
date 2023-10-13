@@ -6,13 +6,14 @@ import { ReviewAndRatingController } from './reviewAndRating.controller';
 const router = express.Router();
 
 router.post(
-  '/create-review',
-  auth(ENUM_USER_ROLE.ADMIN),
+  '/',
+  auth(ENUM_USER_ROLE.USER),
   ReviewAndRatingController.createReviewAndRating
 );
 
 router.get('/', ReviewAndRatingController.getAllReviewAndRatings);
 router.get('/:id', ReviewAndRatingController.getSingleReviewAndRating);
+
 router.patch(
   '/:id',
   auth(ENUM_USER_ROLE.ADMIN),
