@@ -133,8 +133,9 @@ enum Roles {
 
 enum BookingStatus {
   pending
-  accept
-  reject
+  canceled
+  accepted
+  rejected
 
   @@map("booking_status")
 }
