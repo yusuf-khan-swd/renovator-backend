@@ -5,7 +5,7 @@ import { FaqController } from './faq.controller';
 
 const router = express.Router();
 
-router.post('/', auth(ENUM_USER_ROLE.USER), FaqController.createFaq);
+router.post('/', auth(ENUM_USER_ROLE.ADMIN), FaqController.createFaq);
 
 router.get('/', FaqController.getAllFaqs);
 router.get('/:id', FaqController.getSingleFaq);

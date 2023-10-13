@@ -5,7 +5,7 @@ import { BlogController } from './blog.controller';
 
 const router = express.Router();
 
-router.post('/', auth(ENUM_USER_ROLE.USER), BlogController.createBlog);
+router.post('/', auth(ENUM_USER_ROLE.ADMIN), BlogController.createBlog);
 
 router.get('/', BlogController.getAllBlogs);
 router.get('/:id', BlogController.getSingleBlog);
