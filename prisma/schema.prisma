@@ -35,12 +35,16 @@ model Service {
   bookings         Booking[]
   carts            Cart[]
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@map("services")
 }
 
 model Booking {
-  id   String @id @default(uuid())
-  date String
+  id     String        @id @default(uuid())
+  date   String
+  status BookingStatus @default(pending)
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
@@ -48,8 +52,8 @@ model Booking {
   serviceId String
   service   Service @relation(fields: [serviceId], references: [id])
 
-  status    BookingStatus @default(pending)
-  createdAt DateTime      @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("bookings")
 }
@@ -65,6 +69,9 @@ model ReviewAndRating {
   serviceId String
   service   Service @relation(fields: [serviceId], references: [id])
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@map("review_and_ratings")
 }
 
@@ -77,6 +84,9 @@ model Cart {
   serviceId String
   service   Service @relation(fields: [serviceId], references: [id])
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@map("carts")
 }
 
@@ -87,6 +97,9 @@ model Feedback {
   rating Int
   review String
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@map("feedbacks")
 }
 
@@ -95,13 +108,19 @@ model Blog {
   title       String
   description String
 
-  @@map("blog_posts")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("blogs")
 }
 
 model Faq {
   id          String @id @default(uuid())
   title       String
   description String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("faqs")
 }
