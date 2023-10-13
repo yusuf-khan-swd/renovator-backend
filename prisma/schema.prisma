@@ -38,6 +38,22 @@ model Service {
   @@map("services")
 }
 
+model Booking {
+  id   String @id @default(uuid())
+  date String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id])
+
+  status    BookingStatus @default(pending)
+  createdAt DateTime      @default(now())
+
+  @@map("bookings")
+}
+
 model ReviewAndRating {
   id     String @id @default(uuid())
   review String
@@ -62,22 +78,6 @@ model AddToCart {
   service   Service @relation(fields: [serviceId], references: [id])
 
   @@map("add_to_carts")
-}
-
-model Booking {
-  id   String @id @default(uuid())
-  date String
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  serviceId String
-  service   Service @relation(fields: [serviceId], references: [id])
-
-  status    BookingStatus @default(pending)
-  createdAt DateTime      @default(now())
-
-  @@map("bookings")
 }
 
 enum Roles {
