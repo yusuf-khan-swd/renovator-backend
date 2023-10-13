@@ -1,38 +1,26 @@
 import express from 'express';
 import { ENUM_USER_ROLE } from '../../../enums/user';
 import auth from '../../middleware/auth';
-import { OrderController } from './order.controller';
+import { BookingController } from './booking.controller';
 
 const router = express.Router();
 
 router.post(
   '/create-order',
   auth(ENUM_USER_ROLE.USER),
-  OrderController.createOrder
+  BookingController.createBooking
 );
 
 router.get(
   '/',
   auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
-  OrderController.getAllOrders
-);
-
-router.get(
-  '/',
-  auth(ENUM_USER_ROLE.USER),
-  OrderController.getAllOrdersForCustomer
-);
-
-router.get(
-  '/',
-  auth(ENUM_USER_ROLE.ADMIN),
-  OrderController.getAllOrdersForAdmin
+  BookingController.getAllBookings
 );
 
 router.get(
   '/:id',
   auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
-  OrderController.getSingleOrder
+  BookingController.getSingleBooking
 );
 
-export const OrderRoutes = router;
+export const BookingRoutes = router;
