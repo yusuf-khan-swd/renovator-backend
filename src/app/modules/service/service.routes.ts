@@ -5,14 +5,11 @@ import { ServiceController } from './service.controller';
 
 const router = express.Router();
 
-router.post(
-  '/create-book',
-  auth(ENUM_USER_ROLE.ADMIN),
-  ServiceController.createService
-);
+router.post('/', auth(ENUM_USER_ROLE.ADMIN), ServiceController.createService);
 
 router.get('/', ServiceController.getAllServices);
 router.get('/:id', ServiceController.getSingleService);
+
 router.patch(
   '/:id',
   auth(ENUM_USER_ROLE.ADMIN),
