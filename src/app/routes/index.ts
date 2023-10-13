@@ -1,6 +1,7 @@
 import express from 'express';
 import { AddToCartRoutes } from '../modules/addToCart/addToCart.routes';
 import { BookingRoutes } from '../modules/booking/booking.routes';
+import { FeedbackRoutes } from '../modules/feedback/feedback.routes';
 import { ReviewAndRatingRoutes } from '../modules/reviewAndRating/reviewAndRating.routes';
 import { ServiceRoutes } from '../modules/service/service.routes';
 import { UserRoutes } from '../modules/user/user.routes';
@@ -28,6 +29,10 @@ const moduleRoutes = [
   {
     path: '/add-to-cart',
     route: AddToCartRoutes,
+  },
+  {
+    path: '/feedbacks',
+    route: FeedbackRoutes,
   },
 ];
 
