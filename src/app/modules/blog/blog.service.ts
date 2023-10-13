@@ -30,9 +30,9 @@ const deleteBlog = async (id: string): Promise<Blog | null> => {
 };
 
 export const BlogService = {
-  createBlog: createBlog,
-  getAllBlogs: getAllBlogs,
-  getSingleBlog: getSingleBlog,
-  updateBlog: updateBlog,
-  deleteBlog: deleteBlog,
+  createBlog,
+  getAllBlogs,
+  getSingleBlog,
+  updateBlog,
+  deleteBlog,
 };
