@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.post('/', auth(ENUM_USER_ROLE.USER), CartController.createCart);
 
-router.get('/', CartController.getAllCarts);
-router.get('/:id', CartController.getSingleCart);
-router.patch('/:id', auth(ENUM_USER_ROLE.ADMIN), CartController.updateCart);
-router.delete('/:id', auth(ENUM_USER_ROLE.ADMIN), CartController.deleteCart);
+router.get('/', auth(ENUM_USER_ROLE.USER), CartController.getAllCarts);
+router.get('/:id', auth(ENUM_USER_ROLE.USER), CartController.getSingleCart);
+router.patch('/:id', auth(ENUM_USER_ROLE.USER), CartController.updateCart);
+router.delete('/:id', auth(ENUM_USER_ROLE.USER), CartController.deleteCart);
 
 export const CartRoutes = router;
