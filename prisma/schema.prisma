@@ -90,6 +90,22 @@ model Feedback {
   @@map("feedbacks")
 }
 
+model Blog {
+  id          String @id @default(uuid())
+  title       String
+  description String
+
+  @@map("blog_posts")
+}
+
+model Faq {
+  id          String @id @default(uuid())
+  title       String
+  description String
+
+  @@map("faqs")
+}
+
 enum Roles {
   user
   admin
