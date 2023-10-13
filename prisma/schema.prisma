@@ -17,60 +17,68 @@ model User {
   password String
   role     Roles  @default(user)
 
+  reviewAndRatings ReviewAndRating[]
+  bookings         Booking[]
+  addToCarts       AddToCart[]
+
   @@map("users")
 }
 
-// model Category {
-//   id    String @id @default(uuid())
-//   title String
-//   books Book[]
+model Service {
+  id               String            @id @default(uuid())
+  title            String
+  description      String
+  price            Float
+  status           ServiceStatus     @default(available)
+  location         String
+  reviewAndRatings ReviewAndRating[]
+  bookings         Booking[]
+  addToCarts       AddToCart[]
 
-//   @@map("categories")
-// }
+  @@map("services")
+}
 
-// rename service and add description, availability: boolean
-// model Book {
-//   id              String   @id @default(uuid())
-//   title           String
-//   author          String
-//   price           Float
-//   genre           String
-//   publicationDate DateTime
+model ReviewAndRating {
+  id     String @id @default(uuid())
+  review String
+  rating Int
 
-//   categoryId       String
-//   category         Category          @relation(fields: [categoryId], references: [id])
-//   reviewAndRatings ReviewAndRating[]
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
-//   @@map("books")
-// }
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id])
 
-// review & rating
-// model ReviewAndRating {
-//   id     String @id @default(uuid())
-//   review String
-//   rating Int
+  @@map("review_and_ratings")
+}
 
-//   userId String
-//   user   User   @relation(fields: [userId], references: [id])
+model AddToCart {
+  id String @id @default(uuid())
 
-//   bookId String
-//   book   Book   @relation(fields: [bookId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
-//   @@map("review_and_ratings")
-// }
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id])
 
-// booking
+  @@map("add_to_carts")
+}
 
-// model Order {
-//   id String @id @default(uuid())
+model Booking {
+  id   String @id @default(uuid())
+  date String
 
-//   userId String
-//   user   User   @relation(fields: [userId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
-//   orderedBooks Json[]
-//   status       Status   @default(pending)
-//   createdAt    DateTime @default(now())
-// }
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id])
+
+  status    BookingStatus @default(pending)
+  createdAt DateTime      @default(now())
+
+  @@map("bookings")
+}
 
 enum Roles {
   user
@@ -78,8 +86,18 @@ enum Roles {
   super_admin
 }
 
-// enum Status {
-//   pending
-//   shipped
-//   delivered
-// }
+enum BookingStatus {
+  pending
+  accept
+  reject
+
+  @@map("booking_status")
+}
+
+enum ServiceStatus {
+  available
+  not_available
+  upcoming
+
+  @@map("service_status")
+}
