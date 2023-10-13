@@ -80,6 +80,16 @@ model AddToCart {
   @@map("add_to_carts")
 }
 
+model Feedback {
+  id     String @id @default(uuid())
+  name   String
+  email  String
+  rating Int
+  review String
+
+  @@map("feedbacks")
+}
+
 enum Roles {
   user
   admin
