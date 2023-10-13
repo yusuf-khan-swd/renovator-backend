@@ -5,11 +5,7 @@ import { BookingController } from './booking.controller';
 
 const router = express.Router();
 
-router.post(
-  '/create-order',
-  auth(ENUM_USER_ROLE.USER),
-  BookingController.createBooking
-);
+router.post('/', auth(ENUM_USER_ROLE.USER), BookingController.createBooking);
 
 router.get(
   '/',
@@ -21,6 +17,18 @@ router.get(
   '/:id',
   auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
   BookingController.getSingleBooking
+);
+
+router.patch(
+  '/:id',
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
+  BookingController.updateBooking
+);
+
+router.delete(
+  '/:id',
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
+  BookingController.deleteBooking
 );
 
 export const BookingRoutes = router;

@@ -33,8 +33,25 @@ const getSingleBooking = async (
     });
   }
 };
+
+const updateBooking = async (
+  id: string,
+  data: Partial<Booking>
+): Promise<Booking | null> => {
+  return await prisma.booking.update({
+    where: { id },
+    data,
+  });
+};
+
+const deleteBooking = async (id: string): Promise<Booking | null> => {
+  return await prisma.booking.delete({ where: { id } });
+};
+
 export const BookingService = {
   createBooking,
   getAllBookings,
   getSingleBooking,
+  updateBooking,
+  deleteBooking,
 };
