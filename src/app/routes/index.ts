@@ -1,4 +1,5 @@
 import express from 'express';
+import { AddToCartRoutes } from '../modules/addToCart/addToCart.routes';
 import { BookingRoutes } from '../modules/booking/booking.routes';
 import { ReviewAndRatingRoutes } from '../modules/reviewAndRating/reviewAndRating.routes';
 import { ServiceRoutes } from '../modules/service/service.routes';
@@ -17,12 +18,16 @@ const moduleRoutes = [
     route: ServiceRoutes,
   },
   {
+    path: '/bookings',
+    route: BookingRoutes,
+  },
+  {
     path: '/reviews',
     route: ReviewAndRatingRoutes,
   },
   {
-    path: '/orders',
-    route: BookingRoutes,
+    path: '/add-to-cart',
+    route: AddToCartRoutes,
   },
 ];
 
