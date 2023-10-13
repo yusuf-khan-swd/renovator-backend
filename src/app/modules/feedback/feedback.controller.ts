@@ -11,7 +11,7 @@ const createFeedback = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Review created successfully',
+    message: 'Feedback created successfully',
     data: result,
   });
 });
@@ -22,7 +22,7 @@ const getAllFeedbacks = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Get all Review successfully',
+    message: 'Get all feedback successfully',
     data: result,
   });
 });
@@ -34,7 +34,7 @@ const getSingleFeedback = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Get single Review successfully',
+    message: 'Get single feedback successfully',
     data: result,
   });
 });
@@ -47,7 +47,7 @@ const updateFeedback = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Review updated successfully',
+    message: 'Feedback updated successfully',
     data: result,
   });
 });
@@ -59,7 +59,7 @@ const deleteFeedback = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Review deleted successfully',
+    message: 'Feedback deleted successfully',
     data: result,
   });
 });
