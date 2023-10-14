@@ -120,7 +120,7 @@ const updateUserProfile = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User Profile fetched successfully',
+    message: 'User Profile updated successfully',
     data: result,
   });
 });
