@@ -32,7 +32,7 @@ app.post(
   validateRequest(UserValidation.createUserZodValidation),
   UserController.createAdmin
 );
-app.post('/api/v1/auth/signin', UserController.loginUser);
+app.post('/api/v1/auth/login', UserController.loginUser);
 
 app.get(
   '/api/v1/profile',
