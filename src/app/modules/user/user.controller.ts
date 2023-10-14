@@ -32,7 +32,7 @@ const createAdmin = catchAsync(async (req: Request, res: Response) => {
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const data = req.body;
   const result = await UserService.loginUser(data);
-  const { refreshToken, ...others } = result;
+  const { refreshToken } = result;
 
   // set refresh token into cookie
   const cookieOptions = {
@@ -45,8 +45,8 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   res.status(200).send({
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User signin successfully!',
-    token: others.accessToken,
+    message: 'User login successfully!',
+    data: result,
   });
 });
 
