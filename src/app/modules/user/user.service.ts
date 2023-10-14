@@ -40,7 +40,7 @@ const createAdmin = async (data: User): Promise<IUserResponse> => {
 };
 
 const loginUser = async (data: IUserLogin): Promise<ILoginUserResponse> => {
-  const isUserExist = await prisma.user.findFirst({
+  const isUserExist = await prisma.user.findUnique({
     where: {
       email: data?.email,
     },
