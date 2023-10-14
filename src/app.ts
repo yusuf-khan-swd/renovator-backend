@@ -16,8 +16,9 @@ const app: Application = express();
 app.use(
   cors({
     origin:
-      (process.env.NODE_ENV === 'production' && process.env.FRONTEND_URL) ||
-      'http://localhost:3000',
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : 'https://renovator-frontend.vercel.app',
     credentials: true,
   })
 );
@@ -54,7 +55,13 @@ app.patch(
 );
 
 app.get('/', (req, res) => {
-  res.send({ success: true, message: 'Api working' });
+  res.send({
+    success: true,
+    message: `Api working ${
+      (process.env.NODE_ENV === 'production' && process.env.FRONTEND_URL) ||
+      'http://localhost:3000'
+    }`,
+  });
 });
 
 //global error handler
