@@ -29,7 +29,8 @@ const getAllServices = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Service all book successfully',
-    data: result,
+    meta: result.meta,
+    data: result.data,
   });
 });
 
