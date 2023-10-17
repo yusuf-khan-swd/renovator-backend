@@ -17,7 +17,8 @@ const createCart = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllCarts = catchAsync(async (req: Request, res: Response) => {
-  const result = await CartService.getAllCarts();
+  const user = req.user;
+  const result = await CartService.getAllCarts(user);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

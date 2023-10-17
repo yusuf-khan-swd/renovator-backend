@@ -5,8 +5,14 @@ const createCart = async (data: Cart): Promise<Cart> => {
   return await prisma.cart.create({ data });
 };
 
-const getAllCarts = async (): Promise<Cart[]> => {
-  return await prisma.cart.findMany();
+const getAllCarts = async (user: any): Promise<Cart[]> => {
+  const userId = user?.userId;
+  return await prisma.cart.findMany({
+    where: { userId: userId },
+    include: {
+      service: true,
+    },
+  });
 };
 
 const getSingleCart = async (id: string): Promise<Cart | null> => {
