@@ -76,6 +76,7 @@ const getAllServices = async (
     skip,
     take: limit,
     orderBy: { [sortBy]: sortOrder },
+    include: { category: true },
   });
 
   const total = await prisma.service.count();
@@ -93,6 +94,7 @@ const getAllServices = async (
 const getSingleService = async (id: string): Promise<Service | null> => {
   return await prisma.service.findUnique({
     where: { id },
+    include: { category: true },
   });
 };
 
