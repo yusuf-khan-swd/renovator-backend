@@ -6,6 +6,8 @@ import { CartService } from './cart.service';
 
 const createCart = catchAsync(async (req: Request, res: Response) => {
   const data = req.body;
+  const userId = req.user?.userId;
+  data.userId = userId;
   const result = await CartService.createCart(data);
 
   sendResponse(res, {
