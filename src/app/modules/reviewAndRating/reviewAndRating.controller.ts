@@ -7,6 +7,8 @@ import { ReviewAndRatingService } from './reviewAndRating.service';
 const createReviewAndRating = catchAsync(
   async (req: Request, res: Response) => {
     const data = req.body;
+    const userId = req.user?.userId;
+    data.userId = userId;
     const result = await ReviewAndRatingService.createReviewAndRating(data);
 
     sendResponse(res, {
