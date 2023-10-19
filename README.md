@@ -1,12 +1,4 @@
-### Live Link: [Book Catalog Prisma](https://book-catalog-prisma.vercel.app)
-
-```
-customer_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VySWQiOiJiODAyMTUwNi00YTY2LTRjYjItYTU3MS1kYTkxMDAxMjA3ZjkifQ.HijylmDoZzu54WTTwzcMIj7YJ6qkDxEy4tSHrjAIBus
-```
-
-```
-admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDAxIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkzMTUzNjYyLCJleHAiOjE3MjQ2ODk2NjJ9.Kd9o3kPE7ccppjfj9T5pxJzb7cTBtCnkEZiwEXEnVZs
-```
+### Live Link: [Renovator](https://renovator-frontend.vercel.app/)
 
 ### Application Routes:
 
