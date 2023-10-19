@@ -12,7 +12,7 @@ const getAllBookings = async (user: any): Promise<Booking[] | undefined> => {
     });
   }
 
-  if (user.role === 'customer') {
+  if (user.role === 'user') {
     return await prisma.booking.findMany({
       include: { service: true, user: true },
       where: { userId: user?.userId },
