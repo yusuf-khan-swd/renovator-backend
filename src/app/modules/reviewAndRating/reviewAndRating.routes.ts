@@ -11,6 +11,8 @@ router.post(
   ReviewAndRatingController.createReviewAndRating
 );
 
+router.get('/service/:id', ReviewAndRatingController.serviceReviews);
+
 router.get('/', ReviewAndRatingController.getAllReviewAndRatings);
 router.get('/:id', ReviewAndRatingController.getSingleReviewAndRating);
 

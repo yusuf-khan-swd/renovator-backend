@@ -7,6 +7,12 @@ const createReviewAndRating = async (
   return await prisma.reviewAndRating.create({ data });
 };
 
+const serviceReviews = async (id: string): Promise<ReviewAndRating[]> => {
+  return await prisma.reviewAndRating.findMany({
+    where: { serviceId: id },
+  });
+};
+
 const getAllReviewAndRatings = async (): Promise<ReviewAndRating[]> => {
   return await prisma.reviewAndRating.findMany();
 };
@@ -41,4 +47,5 @@ export const ReviewAndRatingService = {
   getSingleReviewAndRating,
   updateReviewAndRating,
   deleteReviewAndRating,
+  serviceReviews,
 };
