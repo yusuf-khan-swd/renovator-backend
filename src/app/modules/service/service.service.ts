@@ -3,7 +3,11 @@ import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import prisma from '../../../shared/prisma';
-import { ServiceSearchableFields } from './service.constant';
+import {
+  ServiceSearchableFields,
+  serviceRelationalFields,
+  serviceRelationalFieldsMapper,
+} from './service.constant';
 import { IServiceFilters } from './service.interface';
 
 const createService = async (data: Service): Promise<Service> => {
@@ -16,6 +20,8 @@ const getAllServices = async (
 ): Promise<IGenericResponse<Service[]>> => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(options);
+
+  console.log(filters);
 
   const { searchTerm, minPrice, maxPrice, ...filterData } = filters;
 
@@ -59,11 +65,19 @@ const getAllServices = async (
   if (Object.keys(filterData).length > 0) {
     andConditions.push({
       AND: Object.keys(filterData).map(key => {
-        return {
-          [key]: {
-            equals: (filterData as any)[key],
-          },
-        };
+        if (serviceRelationalFields.includes(key)) {
+          return {
+            [serviceRelationalFieldsMapper[key]]: {
+              id: (filterData as any)[key],
+            },
+          };
+        } else {
+          return {
+            [key]: {
+              equals: (filterData as any)[key],
+            },
+          };
+        }
       }),
     });
   }
