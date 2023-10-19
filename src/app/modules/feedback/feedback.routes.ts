@@ -5,7 +5,7 @@ import { FeedbackController } from './feedback.controller';
 
 const router = express.Router();
 
-router.post('/', auth(ENUM_USER_ROLE.USER), FeedbackController.createFeedback);
+router.post('/', FeedbackController.createFeedback);
 
 router.get('/', FeedbackController.getAllFeedbacks);
 router.get('/:id', FeedbackController.getSingleFeedback);
