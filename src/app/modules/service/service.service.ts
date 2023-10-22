@@ -1,4 +1,4 @@
-import { Prisma, Service } from '@prisma/client';
+import { Prisma, Service, ServiceStatus } from '@prisma/client';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
@@ -105,6 +105,13 @@ const getAllServices = async (
   };
 };
 
+const getUpcomingServices = async () => {
+  const result = await prisma.service.findMany({
+    where: { status: ServiceStatus.upcoming },
+  });
+  return result;
+};
+
 const getSingleService = async (id: string): Promise<Service | null> => {
   return await prisma.service.findUnique({
     where: { id },
@@ -134,4 +141,5 @@ export const ServiceService = {
   getSingleService,
   updateService,
   deleteService,
+  getUpcomingServices,
 };
