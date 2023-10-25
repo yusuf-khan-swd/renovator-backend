@@ -112,6 +112,13 @@ const getUpcomingServices = async () => {
   return result;
 };
 
+const getOngoingServices = async () => {
+  const result = await prisma.service.findMany({
+    where: { status: ServiceStatus.available },
+  });
+  return result;
+};
+
 const getSingleService = async (id: string): Promise<Service | null> => {
   return await prisma.service.findUnique({
     where: { id },
@@ -142,4 +149,5 @@ export const ServiceService = {
   updateService,
   deleteService,
   getUpcomingServices,
+  getOngoingServices,
 };
