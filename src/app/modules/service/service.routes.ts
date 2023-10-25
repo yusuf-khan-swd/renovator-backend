@@ -8,6 +8,7 @@ const router = express.Router();
 router.post('/', auth(ENUM_USER_ROLE.ADMIN), ServiceController.createService);
 
 router.get('/upcoming', ServiceController.getUpcomingServices);
+router.get('/ongoing', ServiceController.getOngoingServices);
 router.get('/', ServiceController.getAllServices);
 router.get('/:id', ServiceController.getSingleService);
 
