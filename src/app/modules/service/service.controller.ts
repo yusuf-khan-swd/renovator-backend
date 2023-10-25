@@ -45,6 +45,17 @@ const getUpcomingServices = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getOngoingServices = catchAsync(async (req: Request, res: Response) => {
+  const result = await ServiceService.getOngoingServices();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get all ongoing services successfully',
+    data: result,
+  });
+});
+
 const getSingleService = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
   const result = await ServiceService.getSingleService(id);
@@ -89,4 +100,5 @@ export const ServiceController = {
   updateService,
   deleteService,
   getUpcomingServices,
+  getOngoingServices,
 };
