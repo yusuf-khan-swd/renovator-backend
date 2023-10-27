@@ -105,9 +105,11 @@ const getAllServices = async (
   };
 };
 
-const getUpcomingServices = async () => {
+const getUpcomingServices = async (limit: any) => {
+  const limitNum = parseInt(limit) || undefined;
   const result = await prisma.service.findMany({
     where: { status: ServiceStatus.upcoming },
+    take: limitNum,
   });
   return result;
 };

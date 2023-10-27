@@ -35,7 +35,8 @@ const getAllServices = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getUpcomingServices = catchAsync(async (req: Request, res: Response) => {
-  const result = await ServiceService.getUpcomingServices();
+  const limit = req?.query?.limit;
+  const result = await ServiceService.getUpcomingServices(limit);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
