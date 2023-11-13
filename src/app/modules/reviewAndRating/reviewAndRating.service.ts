@@ -11,6 +11,7 @@ const serviceReviews = async (id: string): Promise<ReviewAndRating[]> => {
   return await prisma.reviewAndRating.findMany({
     where: { serviceId: id },
     include: { user: true },
+    orderBy: { createdAt: 'desc' },
   });
 };
 
