@@ -88,6 +88,18 @@ const serviceReviews = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const userReviews = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await ReviewAndRatingService.userReviews(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get all review for a user successfully',
+    data: result,
+  });
+});
+
 export const ReviewAndRatingController = {
   createReviewAndRating,
   getAllReviewAndRatings,
@@ -95,4 +107,5 @@ export const ReviewAndRatingController = {
   updateReviewAndRating,
   deleteReviewAndRating,
   serviceReviews,
+  userReviews,
 };
