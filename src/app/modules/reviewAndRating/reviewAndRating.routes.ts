@@ -12,6 +12,11 @@ router.post(
 );
 
 router.get('/service/:id', ReviewAndRatingController.serviceReviews);
+router.get(
+  '/user/:id',
+  auth(ENUM_USER_ROLE.USER),
+  ReviewAndRatingController.userReviews
+);
 
 router.get('/', ReviewAndRatingController.getAllReviewAndRatings);
 router.get('/:id', ReviewAndRatingController.getSingleReviewAndRating);
