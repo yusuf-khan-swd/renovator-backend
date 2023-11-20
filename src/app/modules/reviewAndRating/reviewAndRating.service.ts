@@ -16,6 +16,7 @@ const getSingleReviewAndRating = async (
 ): Promise<ReviewAndRating | null> => {
   return await prisma.reviewAndRating.findUnique({
     where: { id },
+    include: { service: { include: { category: true } } },
   });
 };
 
@@ -46,7 +47,7 @@ const serviceReviews = async (id: string): Promise<ReviewAndRating[]> => {
 const userReviews = async (id: string): Promise<ReviewAndRating[]> => {
   return await prisma.reviewAndRating.findMany({
     where: { userId: id },
-    include: {service: true},
+    include: { service: true },
     orderBy: { createdAt: 'desc' },
   });
 };
