@@ -9,6 +9,7 @@ const getAllBookings = async (user: any): Promise<Booking[] | undefined> => {
   if (user.role === 'admin') {
     return await prisma.booking.findMany({
       include: { service: true, user: true },
+      orderBy: { createdAt: 'desc' },
     });
   }
 
@@ -16,6 +17,7 @@ const getAllBookings = async (user: any): Promise<Booking[] | undefined> => {
     return await prisma.booking.findMany({
       include: { service: true, user: true },
       where: { userId: user?.userId },
+      orderBy: { createdAt: 'desc' },
     });
   }
 };
