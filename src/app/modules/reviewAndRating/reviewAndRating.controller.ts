@@ -100,6 +100,17 @@ const userReviews = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const adminReviews = catchAsync(async (req: Request, res: Response) => {
+  const result = await ReviewAndRatingService.adminReviews();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get all reviews for admin successfully',
+    data: result,
+  });
+});
+
 export const ReviewAndRatingController = {
   createReviewAndRating,
   getAllReviewAndRatings,
@@ -108,4 +119,5 @@ export const ReviewAndRatingController = {
   deleteReviewAndRating,
   serviceReviews,
   userReviews,
+  adminReviews,
 };
