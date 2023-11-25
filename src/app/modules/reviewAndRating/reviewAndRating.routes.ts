@@ -11,6 +11,12 @@ router.post(
   ReviewAndRatingController.createReviewAndRating
 );
 
+router.get(
+  '/admin-reviews',
+  auth(ENUM_USER_ROLE.ADMIN),
+  ReviewAndRatingController.adminReviews
+);
+
 router.get('/service/:id', ReviewAndRatingController.serviceReviews);
 router.get(
   '/user/:id',
