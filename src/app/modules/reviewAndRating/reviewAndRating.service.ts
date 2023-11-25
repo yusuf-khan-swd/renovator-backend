@@ -54,7 +54,7 @@ const userReviews = async (id: string): Promise<ReviewAndRating[]> => {
 
 const adminReviews = async (): Promise<ReviewAndRating[]> => {
   return await prisma.reviewAndRating.findMany({
-    include: { service: true },
+    include: { service: true, user: true },
     orderBy: { createdAt: 'desc' },
   });
 };
