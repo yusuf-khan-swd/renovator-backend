@@ -12,6 +12,7 @@ const getAllCarts = async (user: any): Promise<Cart[]> => {
     include: {
       service: true,
     },
+    orderBy: { createdAt: 'desc' },
   });
 };
 
