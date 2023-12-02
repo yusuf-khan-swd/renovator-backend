@@ -86,6 +86,8 @@ const getAllUsers = async (user: any): Promise<IUserResponse[]> => {
         name: true,
         email: true,
         role: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
   } else {
@@ -96,6 +98,8 @@ const getAllUsers = async (user: any): Promise<IUserResponse[]> => {
         name: true,
         email: true,
         role: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
   }
