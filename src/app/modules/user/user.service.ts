@@ -89,6 +89,7 @@ const getAllUsers = async (user: any): Promise<IUserResponse[]> => {
         createdAt: true,
         updatedAt: true,
       },
+      orderBy: { createdAt: 'desc' },
     });
   } else {
     result = await prisma.user.findMany({
@@ -101,6 +102,7 @@ const getAllUsers = async (user: any): Promise<IUserResponse[]> => {
         createdAt: true,
         updatedAt: true,
       },
+      orderBy: { createdAt: 'desc' },
     });
   }
 
