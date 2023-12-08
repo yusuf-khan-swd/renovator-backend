@@ -6,9 +6,7 @@ const createCategory = async (data: Category): Promise<Category> => {
 };
 
 const getAllCategories = async (): Promise<Category[]> => {
-  return await prisma.category.findMany({
-    include: { services: true },
-  });
+  return await prisma.category.findMany();
 };
 
 const getSingleCategory = async (id: string): Promise<Category | null> => {
