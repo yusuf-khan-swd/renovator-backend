@@ -29,7 +29,7 @@ const getSingleBooking = async (
   if (user.role === 'admin') {
     return await prisma.booking.findUnique({
       where: { id },
-      include: {service: true, user: true}
+      include: { service: { include: { category: true } }, user: true },
     });
   }
 
