@@ -8,14 +8,32 @@ const createBooking = async (data: any): Promise<Booking> => {
 const getAllBookings = async (user: any): Promise<Booking[] | undefined> => {
   if (user.role === 'admin') {
     return await prisma.booking.findMany({
-      include: { service: true, user: true },
+      include: {
+        service: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
       orderBy: { createdAt: 'desc' },
     });
   }
 
   if (user.role === 'user') {
     return await prisma.booking.findMany({
-      include: { service: true, user: true },
+      include: {
+        service: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
       where: { userId: user?.userId },
       orderBy: { createdAt: 'desc' },
     });
@@ -29,7 +47,16 @@ const getSingleBooking = async (
   if (user.role === 'admin') {
     return await prisma.booking.findUnique({
       where: { id },
-      include: { service: { include: { category: true } }, user: true },
+      include: {
+        service: { include: { category: true } },
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
     });
   }
 

@@ -39,7 +39,15 @@ const deleteReviewAndRating = async (
 const serviceReviews = async (id: string): Promise<ReviewAndRating[]> => {
   return await prisma.reviewAndRating.findMany({
     where: { serviceId: id },
-    include: { user: true },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
+    },
     orderBy: { createdAt: 'desc' },
   });
 };
@@ -54,7 +62,16 @@ const userReviews = async (id: string): Promise<ReviewAndRating[]> => {
 
 const adminReviews = async (): Promise<ReviewAndRating[]> => {
   return await prisma.reviewAndRating.findMany({
-    include: { service: true, user: true },
+    include: {
+      service: true,
+      user: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
+    },
     orderBy: { createdAt: 'desc' },
   });
 };
