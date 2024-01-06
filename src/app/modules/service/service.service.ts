@@ -22,6 +22,7 @@ const getAllServices = async (
     paginationHelpers.calculatePagination(options);
 
   console.log(filters);
+  console.log(options);
 
   const { searchTerm, minPrice, maxPrice, ...filterData } = filters;
 
