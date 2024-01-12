@@ -10,7 +10,7 @@ const getAllCarts = async (user: any): Promise<Cart[]> => {
   return await prisma.cart.findMany({
     where: { userId: userId },
     include: {
-      service: true,
+      service: { include: { category: true } },
     },
     orderBy: { createdAt: 'desc' },
   });
