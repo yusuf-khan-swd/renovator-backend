@@ -75,7 +75,7 @@ const loginUser = async (data: IUserLogin): Promise<ILoginUserResponse> => {
   };
 };
 
-const getAllUsers = async (user: any): Promise<IUserResponse[]> => {
+const getAllUsers = async (user: any): Promise<IUserResponse[] | undefined> => {
   let result;
 
   if (user.role === ENUM_USER_ROLE.SUPER_ADMIN) {
@@ -91,7 +91,7 @@ const getAllUsers = async (user: any): Promise<IUserResponse[]> => {
       },
       orderBy: { createdAt: 'desc' },
     });
-  } else {
+  } else if (user.role === ENUM_USER_ROLE.ADMIN) {
     result = await prisma.user.findMany({
       where: { role: { in: [ENUM_USER_ROLE.USER] } },
       select: {
