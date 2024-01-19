@@ -6,7 +6,9 @@ const createBlog = async (data: Blog): Promise<Blog> => {
 };
 
 const getAllBlogs = async (): Promise<Blog[]> => {
-  return await prisma.blog.findMany();
+  return await prisma.blog.findMany({
+    orderBy: { createdAt: 'desc' },
+  });
 };
 
 const getSingleBlog = async (id: string): Promise<Blog | null> => {

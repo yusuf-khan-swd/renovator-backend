@@ -6,7 +6,9 @@ const createFaq = async (data: Faq): Promise<Faq> => {
 };
 
 const getAllFaqs = async (): Promise<Faq[]> => {
-  return await prisma.faq.findMany();
+  return await prisma.faq.findMany({
+    orderBy: { createdAt: 'desc' },
+  });
 };
 
 const getSingleFaq = async (id: string): Promise<Faq | null> => {
