@@ -6,7 +6,9 @@ const createFeedback = async (data: Feedback): Promise<Feedback> => {
 };
 
 const getAllFeedbacks = async (): Promise<Feedback[]> => {
-  return await prisma.feedback.findMany();
+  return await prisma.feedback.findMany({
+    orderBy: { createdAt: 'desc' },
+  });
 };
 
 const getSingleFeedback = async (id: string): Promise<Feedback | null> => {
