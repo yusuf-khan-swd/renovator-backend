@@ -1,4 +1,5 @@
 import express from 'express';
+import { AboutUsRoutes } from '../modules/aboutUs/aboutUs.routes';
 import { BlogRoutes } from '../modules/blog/blog.routes';
 import { BookingRoutes } from '../modules/booking/booking.routes';
 import { CartRoutes } from '../modules/cart/cart.routes';
@@ -48,6 +49,10 @@ const moduleRoutes = [
   {
     path: '/blogs',
     route: BlogRoutes,
+  },
+  {
+    path: '/about',
+    route: AboutUsRoutes,
   },
 ];
 
