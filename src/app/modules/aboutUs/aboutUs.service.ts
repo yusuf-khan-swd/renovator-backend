@@ -6,9 +6,7 @@ const createAboutUs = async (data: AboutUs): Promise<AboutUs> => {
 };
 
 const getAllAboutUs = async (): Promise<AboutUs[]> => {
-  return await prisma.aboutUs.findMany({
-    orderBy: { createdAt: 'desc' },
-  });
+  return await prisma.aboutUs.findMany();
 };
 
 const getSingleAboutUs = async (id: string): Promise<AboutUs | null> => {
