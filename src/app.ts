@@ -13,16 +13,6 @@ import { ENUM_USER_ROLE } from './enums/user';
 
 const app: Application = express();
 
-// app.use(
-//   cors({
-//     origin:
-//       process.env.NODE_ENV === 'development'
-//         ? 'http://localhost:3000'
-//         : 'https://renovator-frontend.vercel.app',
-//     credentials: true,
-//   })
-// );
-
 app.use(
   cors({
     origin: ['http://localhost:3000', 'https://renovator-frontend.vercel.app'],
