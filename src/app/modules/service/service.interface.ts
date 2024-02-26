@@ -4,4 +4,5 @@ export type IServiceFilters = {
   maxPrice?: string;
   price?: string;
   location?: string;
+  serviceStatus?: string;
 };
