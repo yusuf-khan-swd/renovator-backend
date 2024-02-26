@@ -24,7 +24,10 @@ const getAllServices = async (
   console.log(filters);
   console.log(options);
 
-  const { searchTerm, minPrice, maxPrice, ...filterData } = filters;
+  const { searchTerm, minPrice, maxPrice, serviceStatus, ...filterData } =
+    filters;
+
+  console.log(serviceStatus);
 
   const numMinPrice = Number(minPrice);
   const numMaxPrice = Number(maxPrice);
