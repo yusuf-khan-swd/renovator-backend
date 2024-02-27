@@ -6,6 +6,7 @@ export const ServiceFilterableFields = [
   'maxPrice',
   'location',
   'categoryId',
+  'serviceStatus',
 ];
 
 export const serviceRelationalFields: string[] = ['categoryId'];
