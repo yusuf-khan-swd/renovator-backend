@@ -45,6 +45,18 @@ const getAllServices = async (
     });
   }
 
+  if (serviceStatus) {
+    if (serviceStatus === ServiceStatus.available) {
+      andConditions.push({
+        status: ServiceStatus.available,
+      });
+    } else if (serviceStatus === ServiceStatus.booked) {
+      andConditions.push({
+        status: ServiceStatus.booked,
+      });
+    }
+  }
+
   if (minPrice !== undefined && maxPrice !== undefined) {
     andConditions.push({
       price: {
