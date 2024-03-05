@@ -101,7 +101,8 @@ const deleteUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 const userProfile = catchAsync(async (req: Request, res: Response) => {
-  const id = req.user?.userId;
+  const id = req.params.id;
+  console.log({ user: req?.user });
   const result = await UserService.userProfile(id);
 
   sendResponse(res, {
