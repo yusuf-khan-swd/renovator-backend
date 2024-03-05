@@ -41,7 +41,7 @@ app.post(
 app.post('/api/v1/auth/login', UserController.loginUser);
 
 app.get(
-  '/api/v1/profile',
+  '/api/v1/profile/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
   UserController.userProfile
 );
