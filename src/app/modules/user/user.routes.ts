@@ -13,6 +13,11 @@ router.get(
   UserController.getAllUsers
 );
 router.get(
+  '/admins',
+  auth(ENUM_USER_ROLE.SUPER_ADMIN),
+  UserController.getAllAdminUsers
+);
+router.get(
   '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   UserController.getSingleUser
