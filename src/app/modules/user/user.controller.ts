@@ -62,6 +62,17 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllAdminUsers = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.getAllAdminUsers();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'All Admin Users fetched successfully',
+    data: result,
+  });
+});
+
 const getSingleUser = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
   const result = await UserService.getSingleUser(id);
@@ -130,6 +141,7 @@ export const UserController = {
   createUser,
   createAdmin,
   getAllUsers,
+  getAllAdminUsers,
   getSingleUser,
   updateUser,
   deleteUser,
