@@ -126,6 +126,23 @@ const getAllAdminUsers = async (): Promise<IUserResponse[] | undefined> => {
   return result;
 };
 
+const getAllNormalUsers = async (): Promise<IUserResponse[] | undefined> => {
+  const result = await prisma.user.findMany({
+    where: { role: ENUM_USER_ROLE.USER },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  return result;
+};
+
 const getSingleUser = async (
   id: string
 ): Promise<IUserResponse | null | undefined> => {
@@ -240,6 +257,7 @@ export const UserService = {
   createAdmin,
   getAllUsers,
   getAllAdminUsers,
+  getAllNormalUsers,
   getSingleUser,
   updateUser,
   deleteUser,
