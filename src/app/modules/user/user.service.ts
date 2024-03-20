@@ -82,7 +82,19 @@ const getAllUsers = async (
   let result;
 
   if (user.role === ENUM_USER_ROLE.SUPER_ADMIN) {
-    if (query?.role) {
+    if (query?.role === 'all') {
+      result = await prisma.user.findMany({
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+        orderBy: { createdAt: 'desc' },
+      });
+    } else if (query?.role) {
       result = await prisma.user.findMany({
         where: { role: query?.role },
         select: {
