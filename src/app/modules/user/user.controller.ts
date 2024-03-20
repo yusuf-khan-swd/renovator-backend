@@ -54,7 +54,7 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;
   const query = req.query;
   console.log(query);
-  const result = await UserService.getAllUsers(user);
+  const result = await UserService.getAllUsers(user, query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
