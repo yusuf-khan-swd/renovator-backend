@@ -84,6 +84,7 @@ const getAllUsers = async (
   if (user.role === ENUM_USER_ROLE.SUPER_ADMIN) {
     if (query?.role === 'all') {
       result = await prisma.user.findMany({
+        where: { role: { in: [ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER] } },
         select: {
           id: true,
           name: true,
