@@ -76,55 +76,39 @@ const loginUser = async (data: IUserLogin): Promise<ILoginUserResponse> => {
 };
 
 const getAllUsers = async (
-  user: any,
   query: any
 ): Promise<IUserResponse[] | undefined> => {
   let result;
 
-  if (user.role === ENUM_USER_ROLE.SUPER_ADMIN) {
-    if (query?.role === 'all') {
-      result = await prisma.user.findMany({
-        where: { role: { in: [ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER] } },
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          role: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-        orderBy: { createdAt: 'desc' },
-      });
-    } else if (query?.role) {
-      result = await prisma.user.findMany({
-        where: { role: query?.role },
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          role: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-        orderBy: { createdAt: 'desc' },
-      });
-    } else {
-      result = await prisma.user.findMany({
-        where: { role: { in: [ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER] } },
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          role: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-        orderBy: { createdAt: 'desc' },
-      });
-    }
-  } else if (user.role === ENUM_USER_ROLE.ADMIN) {
+  if (query?.role === 'all') {
     result = await prisma.user.findMany({
-      where: { role: { in: [ENUM_USER_ROLE.USER] } },
+      where: { role: { in: [ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER] } },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  } else if (query?.role) {
+    result = await prisma.user.findMany({
+      where: { role: query?.role },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  } else {
+    result = await prisma.user.findMany({
+      where: { role: { in: [ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER] } },
       select: {
         id: true,
         name: true,
