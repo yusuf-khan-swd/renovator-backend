@@ -51,9 +51,8 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllUsers = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
   const query = req.query;
-  const result = await UserService.getAllUsers(user, query);
+  const result = await UserService.getAllUsers(query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
