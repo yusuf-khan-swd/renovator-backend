@@ -95,7 +95,14 @@ const getAllUsers = async (
     });
   } else if (query?.role) {
     result = await prisma.user.findMany({
-      where: { role: query?.role },
+      where: {
+        role:
+          query?.role === ENUM_USER_ROLE.USER
+            ? ENUM_USER_ROLE.USER
+            : query?.role === ENUM_USER_ROLE.ADMIN
+            ? ENUM_USER_ROLE.ADMIN
+            : undefined,
+      },
       select: {
         id: true,
         name: true,
