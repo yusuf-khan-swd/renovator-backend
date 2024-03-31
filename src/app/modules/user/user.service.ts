@@ -94,14 +94,16 @@ const getAllUsers = async (
       orderBy: { createdAt: 'desc' },
     });
   } else if (query?.role) {
+    const validRole =
+      query?.role === ENUM_USER_ROLE.USER
+        ? ENUM_USER_ROLE.USER
+        : query?.role === ENUM_USER_ROLE.ADMIN
+        ? ENUM_USER_ROLE.ADMIN
+        : undefined;
+
     result = await prisma.user.findMany({
       where: {
-        role:
-          query?.role === ENUM_USER_ROLE.USER
-            ? ENUM_USER_ROLE.USER
-            : query?.role === ENUM_USER_ROLE.ADMIN
-            ? ENUM_USER_ROLE.ADMIN
-            : undefined,
+        role: validRole,
       },
       select: {
         id: true,
