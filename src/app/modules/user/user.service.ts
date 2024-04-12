@@ -14,7 +14,7 @@ import {
 } from './user.interface';
 
 const createUser = async (data: User): Promise<IUserResponse> => {
-  data.role = 'user';
+  data.role = ENUM_USER_ROLE.USER;
   return await prisma.user.create({
     data,
     select: {
@@ -27,7 +27,7 @@ const createUser = async (data: User): Promise<IUserResponse> => {
 };
 
 const createAdmin = async (data: User): Promise<IUserResponse> => {
-  data.role = 'admin';
+  data.role = ENUM_USER_ROLE.ADMIN;
   return await prisma.user.create({
     data,
     select: {
