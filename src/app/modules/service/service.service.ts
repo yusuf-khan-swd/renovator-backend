@@ -50,6 +50,10 @@ const getAllServices = async (
       andConditions.push({
         status: ServiceStatus.available,
       });
+    } else if (serviceStatus === ServiceStatus.upcoming) {
+      andConditions.push({
+        status: ServiceStatus.upcoming,
+      });
     } else if (serviceStatus === ServiceStatus.booked) {
       andConditions.push({
         status: ServiceStatus.booked,
