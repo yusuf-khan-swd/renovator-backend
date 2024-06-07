@@ -51,11 +51,12 @@ const getAllServices = async (
     });
   }
 
-  if (serviceStatus) {
+  if (categoryId) {
     andConditions.push({
       categoryId: categoryId,
     });
   }
+
   if (serviceStatus) {
     if (serviceStatus === ServiceStatus.available) {
       andConditions.push({
