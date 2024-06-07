@@ -5,4 +5,5 @@ export type IServiceFilters = {
   price?: string;
   location?: string;
   serviceStatus?: string;
+  categoryId?: string;
 };
