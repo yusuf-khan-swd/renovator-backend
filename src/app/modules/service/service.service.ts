@@ -24,10 +24,16 @@ const getAllServices = async (
   console.log({ filters });
   console.log({ options });
 
-  const { searchTerm, minPrice, maxPrice, serviceStatus, ...filterData } =
-    filters;
+  const {
+    searchTerm,
+    minPrice,
+    maxPrice,
+    serviceStatus,
+    categoryId,
+    ...filterData
+  } = filters;
 
-  console.log({ serviceStatus });
+  console.log({ serviceStatus, categoryId });
 
   const numMinPrice = Number(minPrice);
   const numMaxPrice = Number(maxPrice);
@@ -45,6 +51,11 @@ const getAllServices = async (
     });
   }
 
+  if (serviceStatus) {
+    andConditions.push({
+      categoryId: categoryId,
+    });
+  }
   if (serviceStatus) {
     if (serviceStatus === ServiceStatus.available) {
       andConditions.push({
