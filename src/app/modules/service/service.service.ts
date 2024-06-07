@@ -21,13 +21,13 @@ const getAllServices = async (
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(options);
 
-  console.log(filters);
-  console.log(options);
+  console.log({ filters });
+  console.log({ options });
 
   const { searchTerm, minPrice, maxPrice, serviceStatus, ...filterData } =
     filters;
 
-  console.log(serviceStatus);
+  console.log({ serviceStatus });
 
   const numMinPrice = Number(minPrice);
   const numMaxPrice = Number(maxPrice);
