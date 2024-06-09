@@ -114,8 +114,12 @@ const getAllServices = async (
     });
   }
 
+  console.log({ andConditions });
+
   const whereConditions: Prisma.ServiceWhereInput =
     andConditions.length > 0 ? { AND: andConditions } : {};
+
+  console.log({ whereConditions });
 
   const result = await prisma.service.findMany({
     where: whereConditions,
@@ -124,6 +128,8 @@ const getAllServices = async (
     orderBy: { [sortBy]: sortOrder },
     include: { category: true },
   });
+
+  console.log({ result });
 
   const total = await prisma.service.count();
 
