@@ -114,8 +114,6 @@ const getAllServices = async (
     });
   }
 
-  console.log({ andConditions });
-
   const whereConditions: Prisma.ServiceWhereInput =
     andConditions.length > 0 ? { AND: andConditions } : {};
 
