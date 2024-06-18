@@ -117,8 +117,6 @@ const getAllServices = async (
   const whereConditions: Prisma.ServiceWhereInput =
     andConditions.length > 0 ? { AND: andConditions } : {};
 
-  console.log('whereConditions:', { ...whereConditions });
-
   const result = await prisma.service.findMany({
     where: whereConditions,
     skip,
