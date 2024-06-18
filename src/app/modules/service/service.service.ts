@@ -129,8 +129,6 @@ const getAllServices = async (
     include: { category: true },
   });
 
-  console.log({ result });
-
   const total = await prisma.service.count();
 
   return {
