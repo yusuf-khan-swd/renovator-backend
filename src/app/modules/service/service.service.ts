@@ -75,20 +75,20 @@ const getAllServices = async (
     }
   }
 
-  if (minPrice !== undefined && maxPrice !== undefined) {
+  if (minPrice && maxPrice) {
     andConditions.push({
       price: {
         gte: numMinPrice,
         lte: numMaxPrice,
       },
     });
-  } else if (numMinPrice) {
+  } else if (minPrice) {
     andConditions.push({
       price: {
         gte: numMinPrice,
       },
     });
-  } else if (maxPrice !== undefined) {
+  } else if (maxPrice) {
     andConditions.push({
       price: {
         lte: numMaxPrice,
