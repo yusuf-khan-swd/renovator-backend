@@ -82,7 +82,7 @@ const getAllServices = async (
         lte: numMaxPrice,
       },
     });
-  } else if (minPrice !== undefined) {
+  } else if (minPrice) {
     andConditions.push({
       price: {
         gte: numMinPrice,
