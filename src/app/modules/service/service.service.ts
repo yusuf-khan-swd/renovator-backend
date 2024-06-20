@@ -75,7 +75,7 @@ const getAllServices = async (
     }
   }
 
-  if (minPrice && maxPrice) {
+  if (numMinPrice && numMaxPrice) {
     andConditions.push({
       price: {
         gte: numMinPrice,
