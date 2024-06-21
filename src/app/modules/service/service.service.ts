@@ -33,8 +33,6 @@ const getAllServices = async (
     ...filterData
   } = filters;
 
-  console.log({ serviceStatus, categoryId, minPrice, maxPrice });
-
   const numMinPrice = Number(minPrice);
   const numMaxPrice = Number(maxPrice);
 
