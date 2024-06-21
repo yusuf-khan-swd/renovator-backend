@@ -38,8 +38,6 @@ const getAllServices = async (
   const numMinPrice = Number(minPrice);
   const numMaxPrice = Number(maxPrice);
 
-  console.log({ numMinPrice, numMaxPrice });
-
   const andConditions = [];
 
   if (searchTerm) {
