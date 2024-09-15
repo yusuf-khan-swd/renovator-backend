@@ -1,4 +1,7 @@
 
-Server is not working for logins getting service 
+[Fixed] - Local Server also not working
+[Solution] use orm connection url with two url DATABASE_URL, and DIRECT_URL. For first one use "?pgbouncer=true" and second one change route to 5432
+
+Server is not working for logins and getting service 
 
 Deploy to Vercel - 9:40 PM 9/14/2024
